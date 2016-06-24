@@ -102,4 +102,17 @@ class Encryptor
       selection = gets.chomp.to_i
     end
 
+    def check_password
+
+      require 'digest/md5'
+
+      puts "Input password: "
+      password = gets.chomp
+      if (Digest::MD5.hexdigest(password) == "3e25960a79dbc69b674cd4ec67a72c62")
+        real_time
+      else
+        "Incorrect Password"
+      end
+    end
+
 end
