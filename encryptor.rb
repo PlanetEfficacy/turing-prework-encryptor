@@ -1,4 +1,8 @@
+require 'pry'
+require 'pry-byebug'
+
 class Encryptor
+
   def cipher(rotation)
       characters = (' '..'z').to_a
       rotated_characters = characters.rotate(rotation)
@@ -112,6 +116,42 @@ class Encryptor
         real_time
       else
         "Incorrect Password"
+      end
+    end
+
+    def rotation_array
+      [5, 9, 23]
+    end
+
+    def better_rot_encrypt(string)
+      letters = string.split("")
+      i = 0
+
+      results = letters.collect do |letter|
+        rotation = rotation_array[i]
+        i = incrament_array(i)
+        encrypted_letter = encrypt_letter(letter, rotation)
+      end
+      #binding.pry
+      results.join
+    end
+
+    def better_rot_decrypt(string)
+      letters = string.split("")
+      i = 0
+      results = letters.collect do |letter|
+        rotation = rotation_array[i]
+        i = incrament_array(i)
+        decrypt_letter(letter, rotation)
+      end
+      results.join
+    end
+
+    def incrament_array(i)
+      if i < 2
+        i += 1
+      else
+        i = 0
       end
     end
 
